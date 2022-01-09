@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moto circolare</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <script>
   //stop=1  se non avviato =0 se avviato
@@ -22,10 +21,17 @@ var secondi=0;
 var decimi=0;
 var visualizzazione="";
 var stop=1; //0=attivo 1=fermo
-var lunghezza=0;
-var t = 0;
-var g = 9.8;
-var pi = 3.14;
+var spostamento=0;
+var tempo=0;
+var v=0;
+var t=0;
+var ass=0;
+var ac=0;
+var acc=0;
+var rag=0;
+var r=0;
+var fre=0;
+var f=0;
 
 function avvia()
 {
@@ -72,35 +78,107 @@ decimi=0;
 a=document.getElementById("mostra_cronometro").value="00:00:00:0";
 }
 }
-function periodo(){
-   lunghezza = document.getElementById("calcolo").value;
-   t = 2*pi*Math.sqrt(lunghezza / g)
+function delta(){
+  spostamento=document.getElementById('delta').value;
+  t = document.getElementById('tempo').value;
+  v = (spostamento / t).toPrecision(5);
+  ass = document.getElementById('ve');
+  ass.innerHTML = "La velocità angolare è" + " " + v + " " + "rad/s";
+  r =document.getElementById('raggio').value;
+  ac = document.getElementById('acce');
+  acc = ((v**2)*r).toPrecision(5);
+  ac.innerHTML= "L'accelerazione centripeta è:" + " " +acc+ " " +"m/s2";
+  fre=document.getElementById('fre');
+  f= (1/t).toPrecision(5);
+  fre.innerHTML= "La frequenza è" + " " + f+ " "+ "Hz";
 }
 
 </script>
 <style>
+  body{
+    background-color: #003366;
+}
 
+#logo{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: relative;
+    left: 300px;
+
+}
+#text{
+  color: white;
+  position: relative;
+  bottom: 110px;
+  left: 90px;
+}
+#raggio{
+  position: relative;
+  bottom: 0px;
+  right: 0px;
+}
+#vang{
+  width: 95px;
+  height: 15px;
+  background-color: white;
+}
+#ve{
+  color: white;
+}
+#acce{
+  color: white;
+}
+#fre{
+  color: white;
+}
+#lista{
+  color: white;
+}
+#ist{
+  color: white;
+}
+#sopra{
+  position: relative;
+  bottom: 310px;
+}
+#ima{
+  position: relative;
+  border-radius: 50%;
+  bottom: 50px;
+  left: 910px;
+}
 
 </style>
 <body>
-  <h1 id="title">Il pendolo</h1>
-  <img  id= "logo" src="https://www.movimentidanzesacre.it/wp-content/uploads/2019/01/Legge-del-Pendolo-Maurice-Nicoll-Lavoro-Consapevolezza-Lato-Oscuro-Circolo-della-vita-e1547050013342.jpg" alt="">
-    <div id="sopra">
-     <p id="ist">Istruzioni per l'esperimento </p>
-     <ul id="lista">
-      <li>Avvia il servomotore</li>
-      <li>Calcola il periodo attraverso il cronometro</li>
-      <li>Inserisci le grandezze richieste </li>
-     </ul>
-     </div>
-  <div id="cronometro"><input id="mostra_cronometro" style="text-align:center;" value="00:00:00:0" disabled="disabled" />
 
-  <button onclick="javascript:avvia();" />Avvia il cronometro!</button>&nbsp;<button onclick="javascript:ferma();" />STOP!</button>&nbsp;<button onclick="javascript:azzera();" />Azzera!</button><br><br></div>
-  <h2 id="algebrico">Periodo algebrico</h2>
-  <div id="calcolo"><input type="number" id="lunghezza" placeholder="Inserisci la lunghezza">
-  <button id="calcola" onclick="javascript:periodo();">Calcola</button></div>
-  <input type="number" placeholder="Inserisci il periodo misurato">
-  
+  <img id="logo" src="https://ih1.redbubble.net/image.297516111.5286/flat,750x,075,f-pad,750x1000,f8f8f8.u2.jpg"
+  <div id="scritta">
+    <h1 id="text">Moto circolare</h1>
+  </div>
+  <img  id="ima"src="http://www.andreaminini.org/data/andreamininiorg/rappresentazione-velocita-angolare.gif" alt="">
+  <div id="sopra">
+
+  <p id="ist">Istruzioni per l'esperimento </p>
+   <ul id="lista">
+    <li>Avvia il servomotore</li>
+    <li>Calcola il periodo attraverso il cronometro</li>
+    <li>Inserisci le grandezze richieste </li>
+   </ul>
+
+  <input id="mostra_cronometro" style="text-align:center;" value="00:00:00:0" disabled="disabled" />
+
+  <button onclick="javascript:avvia();" />Avvia il cronometro!</button>&nbsp;<button onclick="javascript:ferma();" />STOP!</button>&nbsp;<button onclick="javascript:azzera();" />Azzera!</button><br><br>
+<input type="Number" placeholder=" Spostameno angolare" id="delta"name="" value="">
+
+<input type="number" name="" value="" id="tempo" placeholder="Inserisci il tempo">
+<input type="number"  id="raggio" placeholder="Inserisci il raggio"name="" value="">
+<button type="button" onclick="javascript:delta();"id=""name="button">Ok</button>
+<p id="ve"></p>
+<p id="acce"></p>
+<p id="fre"></p>
+ </div>
+
 
 </body>
 </html>
